@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class ticTacToe {
+public class Main {
     public static final Scanner SCANNER = new Scanner(System.in);
     public static boolean winner;
     public static char[] board = new char[9];
