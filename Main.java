@@ -4,8 +4,8 @@ import java.util.stream.IntStream;
 public class Main {
     public static final Scanner SCANNER = new Scanner(System.in);
     public static boolean winner;
-    public static char[] board = new char[9];
-    public static char blank = '-';
+    public static final char[] board = new char[9];
+    public static final char blank = '-';
 
     public static void main(String[] args) {
         IntStream.range(0, 9).forEach(i -> board[i] = blank);
