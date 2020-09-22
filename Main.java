@@ -59,7 +59,7 @@ public class Main {
             System.out.println("You should enter numbers.");
             move(player);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Numbers should be from 1 to 9.");
+            System.out.println("Number should be from 1 to 9.");
             move(player);
         }
     }
