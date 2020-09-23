@@ -3,7 +3,6 @@ import java.util.stream.IntStream;
 
 public class Main {
     public static final Scanner SCANNER = new Scanner(System.in);
-    public static boolean winner;
     public static final char[] board = new char[9];
     public static final char blank = '-';
 
@@ -21,8 +20,7 @@ public class Main {
                 break;
             }
 
-            checkWinner();
-            if (winner) {
+            if (winner()) {
                 printBoard();
                 printWinMessage(player);
                 break;
@@ -30,19 +28,21 @@ public class Main {
         }
     }
 
-    private static void checkWinner() {
-        checkWinningConditions(0, 1, 2);
-        checkWinningConditions(3, 4, 5);
-        checkWinningConditions(6, 7, 8);
-        checkWinningConditions(0, 3, 6);
-        checkWinningConditions(1, 4, 7);
-        checkWinningConditions(2, 5, 8);
-        checkWinningConditions(0, 4, 8);
-        checkWinningConditions(2, 4, 6);
+    private static boolean winner() {
+        return checkWinner();
     }
 
-    private static void checkWinningConditions(int a, int b, int c) {
-        winner = board[a] != blank && board[a] == board[b] && board[b] == board[c] || winner;
+    private static boolean checkWinner() {
+        for (int i = 0; i < 9; i += 3) {
+            if (board[i] != blank && board[i] == board[i + 1] && board[i + 1] == board[i + 2]) return true;
+        }
+        for (int i = 0; i < 3; i++) {
+            if (board[i] != blank && board[i] == board[i + 3] && board[i + 3] == board[i + 6]) return true;
+        }
+        for (int i = 0; i <= 2; i += 2) {
+            if (board[i] != blank && board[i] == board[4] && board[4] == board[8 - i]) return true;
+        }
+        return false;
     }
 
     private static void move(char player) {
