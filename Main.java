@@ -48,9 +48,9 @@ public class Main {
     private static void move(char player) {
         System.out.printf("%s: ", player);
         try {
-            int x = Integer.parseInt(SCANNER.next()) - 1;
-            if (board[x] == blank) {
-                board[x] = player;
+            int pos = Integer.parseInt(SCANNER.next()) - 1;
+            if (board[pos] == blank) {
+                board[pos] = player;
             } else {
                 System.out.println("That position is occupied, try another one.");
                 move(player);
