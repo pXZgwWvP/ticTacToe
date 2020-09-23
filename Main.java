@@ -33,13 +33,13 @@ public class Main {
     }
 
     private static boolean checkWinner() {
-        for (int i = 0; i < 9; i += 3) {
+        for (int i = 0; i < 9; i += 3) { // checks the rows;
             if (board[i] != blank && board[i] == board[i + 1] && board[i + 1] == board[i + 2]) return true;
         }
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) { // checks the columns;
             if (board[i] != blank && board[i] == board[i + 3] && board[i + 3] == board[i + 6]) return true;
         }
-        for (int i = 0; i <= 2; i += 2) {
+        for (int i = 0; i <= 2; i += 2) { // checks the diagonals;
             if (board[i] != blank && board[i] == board[4] && board[4] == board[8 - i]) return true;
         }
         return false;
