@@ -3,8 +3,8 @@ import java.util.stream.IntStream;
 
 public class Main {
     public static final Scanner SCANNER = new Scanner(System.in);
-    public static final char[] board = new char[9];
-    public static final char blank = '-';
+    private static final char[] board = new char[9];
+    private static final char blank = '-';
 
     public static void main(String[] args) {
         IntStream.range(0, 9).forEach(i -> board[i] = blank);
@@ -20,7 +20,7 @@ public class Main {
                 break;
             }
 
-            if (winner()) {
+            if (hasWinner()) {
                 printBoard();
                 printWinMessage(player);
                 break;
@@ -28,18 +28,14 @@ public class Main {
         }
     }
 
-    private static boolean winner() {
-        return checkWinner();
-    }
-
-    private static boolean checkWinner() {
-        for (int i = 0; i < 9; i += 3) { // checks the rows;
+    private static boolean hasWinner() {
+        for (int i = 0; i < 9; i += 3) { // checks rows.
             if (board[i] != blank && board[i] == board[i + 1] && board[i + 1] == board[i + 2]) return true;
         }
-        for (int i = 0; i < 3; i++) { // checks the columns;
+        for (int i = 0; i < 3; i++) { // checks columns.
             if (board[i] != blank && board[i] == board[i + 3] && board[i + 3] == board[i + 6]) return true;
         }
-        for (int i = 0; i <= 2; i += 2) { // checks the diagonals;
+        for (int i = 0; i <= 2; i += 2) { // checks diagonals.
             if (board[i] != blank && board[i] == board[4] && board[4] == board[8 - i]) return true;
         }
         return false;
@@ -59,7 +55,7 @@ public class Main {
             System.out.println("You should enter numbers.");
             move(player);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Number should be from 1 to 9.");
+            System.out.println("Numbers should be from 1 to 9.");
             move(player);
         }
     }
