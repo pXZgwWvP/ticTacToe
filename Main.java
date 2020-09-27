@@ -1,24 +1,27 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class Main {
-    public static final Scanner SCANNER = new Scanner(System.in);
-    private static final char[] board = new char[9];
-    private static final char blank = '-';
+    static final Scanner SCANNER = new Scanner(System.in);
+    static final char[] board = new char[9];
+    static final char blank = '-';
 
     public static void main(String[] args) {
         IntStream.range(0, 9).forEach(i -> board[i] = blank);
 
-        final char[] turnLoop = {'X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X', ' '};
-        for (char player : turnLoop) {
+        for (int i = 1; i <= 10; i++) {
+            char player = i % 2 == 0 ? 'X' : 'O';
             printBoard();
 
-            if (player != ' ') {
+            if (i != 10) {
                 move(player);
             } else {
                 printDrawMessage();
                 break;
             }
+
+            if (i < 5) continue;
 
             if (hasWinner()) {
                 printBoard();
@@ -28,20 +31,23 @@ public class Main {
         }
     }
 
-    private static boolean hasWinner() {
-        for (int i = 0; i < 9; i += 3) { // checks rows.
-            if (board[i] != blank && board[i] == board[i + 1] && board[i + 1] == board[i + 2]) return true;
-        }
-        for (int i = 0; i < 3; i++) { // checks columns.
-            if (board[i] != blank && board[i] == board[i + 3] && board[i + 3] == board[i + 6]) return true;
-        }
-        for (int i = 0; i <= 2; i += 2) { // checks diagonals.
-            if (board[i] != blank && board[i] == board[4] && board[4] == board[8 - i]) return true;
-        }
+    static boolean hasWinner() {
+        // checks rows.
+        for (int i = 0; i < 9; i += 3)
+            if (board[i] != blank && board[i] == board[i + 1] && board[i + 1] == board[i + 2])
+                return true;
+        // checks columns.
+        for (int i = 0; i < 3; i++)
+            if (board[i] != blank && board[i] == board[i + 3] && board[i + 3] == board[i + 6])
+                return true;
+        // checks diagonals.
+        for (int i = 0; i <= 2; i += 2)
+            if (board[i] != blank && board[i] == board[4] && board[4] == board[8 - i])
+                return true;
         return false;
     }
 
-    private static void move(char player) {
+    static void move(char player) {
         System.out.printf("%s: ", player);
         try {
             int pos = Integer.parseInt(SCANNER.next()) - 1;
@@ -60,20 +66,18 @@ public class Main {
         }
     }
 
-    private static void printDrawMessage() {
+    static void printDrawMessage() {
         System.out.println("Draw!");
     }
 
-    private static void printWinMessage(char player) {
+    static void printWinMessage(char player) {
         System.out.printf("Winner = %s", player);
     }
 
-    private static void printBoard() {
+    static void printBoard() {
         IntStream.range(0, 10).forEach(i -> System.out.println());
-        Arrays.asList("---------",
-                "| " + board[6] + " " + board[7] + " " + board[8] + " |",
-                "| " + board[3] + " " + board[4] + " " + board[5] + " |",
-                "| " + board[0] + " " + board[1] + " " + board[2] + " |",
-                "---------").forEach(System.out::println);
+        Arrays.asList("---------", "| " + board[6] + " " + board[7] + " " + board[8] + " |",
+                                   "| " + board[3] + " " + board[4] + " " + board[5] + " |",
+                                   "| " + board[0] + " " + board[1] + " " + board[2] + " |", "---------").forEach(System.out::println);
     }
 }
