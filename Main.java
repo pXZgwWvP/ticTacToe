@@ -23,7 +23,7 @@ public class Main {
 
             if (i < 5) continue;
 
-            if (hasWinner()) {
+            if (hasWinner(player)) {
                 printBoard();
                 printWinMessage(player);
                 break;
@@ -31,24 +31,24 @@ public class Main {
         }
     }
 
-    static boolean hasWinner() {
+    static boolean hasWinner(char player) {
         // checks rows.
         for (int i = 0; i < 9; i += 3)
-            if (board[i] != blank && board[i] == board[i + 1] && board[i + 1] == board[i + 2])
+            if (board[i] == player && board[i] == board[i + 1] && board[i + 1] == board[i + 2])
                 return true;
         // checks columns.
         for (int i = 0; i < 3; i++)
-            if (board[i] != blank && board[i] == board[i + 3] && board[i + 3] == board[i + 6])
+            if (board[i] == player && board[i] == board[i + 3] && board[i + 3] == board[i + 6])
                 return true;
         // checks diagonals.
         for (int i = 0; i <= 2; i += 2)
-            if (board[i] != blank && board[i] == board[4] && board[4] == board[8 - i])
+            if (board[i] == player && board[i] == board[4] && board[4] == board[8 - i])
                 return true;
         return false;
     }
 
     static void move(char player) {
-        System.out.printf("%s: ", player);
+        System.out.printf("%c: ", player);
         try {
             int pos = Integer.parseInt(SCANNER.next()) - 1;
             if (board[pos] == blank) {
@@ -71,7 +71,7 @@ public class Main {
     }
 
     static void printWinMessage(char player) {
-        System.out.printf("Winner = %s", player);
+        System.out.printf("Winner = %c", player);
     }
 
     static void printBoard() {
